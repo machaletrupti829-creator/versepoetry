@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VersePoetry | Admin Dashboard</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f4fb;
+    color: #292238;
+}
+
+header {
+    background: #512878;
+    color: #fff;
+    padding: 22px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+header p {
+    margin-top: 6px;
+    color: #eadcf7;
+    font-size: 14px;
+}
+
+.logout, .btn {
+    border: 0;
+    border-radius: 7px;
+    padding: 10px 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.logout {
+    background: #fff;
+    color: #512878;
+}
+
+.container {
+    width: 94%;
+    max-width: 1250px;
+    margin: 28px auto;
+}
+
+.flash {
+    padding: 12px;
+    margin: 12px 0;
+    background: #e3f8e9;
+    color: #176b35;
+    border-radius: 7px;
+}
+
+.flash.error {
+    background: #ffe7e7;
+    color: #a21b1b;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e7dcef;
+}
+
+.stat span {
+    display: block;
+    color: #706579;
+    margin-bottom: 8px;
+}
+
+.stat strong {
+    font-size: 28px;
+    color: #512878;
+}
+
+h2 {
+    color: #512878;
+    margin: 26px 0 12px;
+}
+
+.section-note {
+    color: #756c7e;
+    font-size: 14px;
+    margin-top: -5px;
+    margin-bottom: 14px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e9e1ef;
+    margin-bottom: 24px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 900px;
+}
+
+th, td {
+    padding: 13px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee8f3;
+    vertical-align: top;
+    font-size: 14px;
+}
+
+th {
+    background: #eee5f6;
+    color: #512878;
+}
+
+td.content {
+    white-space: pre-wrap;
+    max-width: 350px;
+    overflow-wrap: anywhere;
+}
+
+.poem-text {
+    margin-bottom: 10px;
+}
+
+.badge {
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.Pending {
+    background: #fff1c7;
+    color: #8a6500;
+}
+
+.Approved {
+    background: #dff7e7;
+    color: #176b35;
+}
+
+.Rejected {
+    background: #ffe4e4;
+    color: #a21b1b;
+}
+
+.actions {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.actions form {
+    display: inline-block;
+}
+
+.approve {
+    background: #218838;
+    color: #fff;
+}
+
+.reject {
+    background: #dc3545;
+    color: #fff;
+}
+
+.edit {
+    background: #5b2c83;
+    color: #fff;
+}
+
+.view-file {
+    background: #1769aa;
+    color: #fff;
+    margin-top: 5px;
+}
+
+.btn:hover, .logout:hover {
+    opacity: .85;
+}
+
+.empty {
+    text-align: center;
+    padding: 20px;
+    color: #7c7383;
+}
+
+.search {
+    width: 100%;
+    max-width: 420px;
+    padding: 12px;
+    border: 1px solid #d8c9e5;
+    border-radius: 8px;
+    margin: 12px 0 4px;
+}
+
+footer {
+    text-align: center;
+    color: #888;
+    padding: 22px;
+    font-size: 13px;
+}
+
+@media(max-width: 650px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 23px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1>VersePoetry Admin</h1>
+        <p>Review and manage submitted poems</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('admin_logout') }}">
+        <button class="logout" type="submit">Logout</button>
+    </form>
+</header>
+
+<main class="container">
+
+    <h2>Welcome, {{ admin_name|default('Admin') }}</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ 'error' if category == 'error' else '' }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <section class="stats">
+
+        <div class="stat">
+            <span>Pending Poems</span>
+            <strong>{{ pending_count }}</strong>
+        </div>
+
+        <div class="stat">
+            <span>Approved Poems</span>
+            <strong>{{ approved_count }}</strong>
+        </div>
+
+        <div class="stat">
+            <span>Rejected Poems</span>
+            <strong>{{ rejected_count }}</strong>
+        </div>
+
+    </section>
+
+    <input
+        class="search"
+        id="search"
+        type="search"
+        placeholder="Search poems by title, author or content..."
+        oninput="filterRows()"
+    >
+
+    {% for section_title, poems, status in [
+        ('Pending Poems', pending_poems, 'Pending'),
+        ('Approved Poems', approved_poems, 'Approved'),
+        ('Rejected Poems', rejected_poems, 'Rejected')
+    ] %}
+
+        <h2>{{ section_title }}</h2>
+
+        <p class="section-note">
+            {% if status == 'Pending' %}
+                Review each submission and approve or reject it.
+            {% else %}
+                You can edit or change the status of these poems too.
+            {% endif %}
+        </p>
+
+        <div class="table-wrap">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Poem / Uploaded File</th>
+                        <th>Submitted</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                {% for poem in poems %}
+
+                    <tr class="poem-row">
+
+                        <td>{{ poem.title }}</td>
+
+                        <td>
+                            {{ poem.author_name|default('Unknown', true) }}
+                        </td>
+
+                        <td class="content">
+
+                            {% if poem.content %}
+                                <div class="poem-text">{{ poem.content }}</div>
+                            {% endif %}
+
+                            {% if poem.file_path %}
+                                <a
+                                    class="btn view-file"
+                                    href="{{ url_for('view_poem_file', poem_id=poem.id) }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    View File
+                                </a>
+                            {% endif %}
+
+                            {% if not poem.content and not poem.file_path %}
+                                No poem content available.
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ poem.created_at|default('—', true) }}
+                        </td>
+
+                        <td>
+                            <span class="badge {{ status }}">
+                                {{ status }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="actions">
+
+                                <a
+                                    class="btn edit"
+                                    href="{{ url_for('edit_poem', poem_id=poem.id) }}"
+                                >
+                                    Edit
+                                </a>
+
+                                {% if status != 'Approved' %}
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('review_poem', poem_id=poem.id) }}"
+                                        onsubmit="return confirm('Approve this poem?')"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="action"
+                                            value="approve"
+                                        >
+
+                                        <button class="btn approve" type="submit">
+                                            Approve
+                                        </button>
+                                    </form>
+                                {% endif %}
+
+                                {% if status != 'Rejected' %}
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('review_poem', poem_id=poem.id) }}"
+                                        onsubmit="return confirm('Reject this poem?')"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="action"
+                                            value="reject"
+                                        >
+
+                                        <button class="btn reject" type="submit">
+                                            Reject
+                                        </button>
+                                    </form>
+                                {% endif %}
+
+                            </div>
+                        </td>
+
+                    </tr>
+
+                {% else %}
+
+                    <tr>
+                        <td class="empty" colspan="6">
+                            No {{ status|lower }} poems.
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+
+    {% endfor %}
+
+</main>
+
+<footer>
+    &copy; 2026 VersePoetry
+</footer>
+
+<script>
+function filterRows() {
+    const q = document.getElementById('search').value.toLowerCase().trim();
+
+    document.querySelectorAll('.poem-row').forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(q)
+            ? ''
+            : 'none';
+    });
+}
+</script>
+
+</body>
+</html>

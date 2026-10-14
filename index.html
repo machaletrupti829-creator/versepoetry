@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VersePoetry | Home</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #fff7ed, #f3e8ff);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: #4c1d95;
+            padding: 15px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-section img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .logo-section h2 {
+            color: white;
+            font-size: 25px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #fcd34d;
+        }
+
+        .nav-links .login-link {
+            background: #fcd34d;
+            color: #4c1d95;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links .login-link:hover {
+            background: white;
+            color: #4c1d95;
+        }
+
+        /* Main Hero Section */
+        .hero {
+            min-height: 75vh;
+            padding: 75px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 45px;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1 1 350px;
+        }
+
+        .tagline {
+            display: inline-block;
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 9px 16px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 5vw, 62px);
+            color: #4c1d95;
+            line-height: 1.2;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #9333ea;
+        }
+
+        .hero-content p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #555;
+            max-width: 580px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5b21b6;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 2px solid #7c3aed;
+            color: #6d28d9;
+        }
+
+        .btn-secondary:hover {
+            background: #ede9fe;
+        }
+
+        /* Decorative Poetry Card */
+        .poetry-card {
+            flex: 0 1 380px;
+            background: white;
+            padding: 40px 32px;
+            border-radius: 22px;
+            box-shadow: 0 15px 40px rgba(76, 29, 149, 0.13);
+            border: 1px solid #ede9fe;
+            text-align: center;
+        }
+
+        .quote-symbol {
+            font-size: 65px;
+            line-height: 1;
+            color: #a78bfa;
+        }
+
+        .poetry-card h2 {
+            color: #4c1d95;
+            font-size: 27px;
+            margin: 15px 0;
+        }
+
+        .poetry-card p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.9;
+            font-style: italic;
+        }
+
+        .poetry-line {
+            width: 65px;
+            height: 4px;
+            background: #92cdc3;
+            margin: 22px auto;
+            border-radius: 5px;
+        }
+
+        .poetry-card small {
+            color: #7c3aed;
+            font-weight: bold;
+        }
+
+        /* Features */
+        .features {
+            padding: 45px 8% 75px;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 34px;
+            color: #4c1d95;
+            margin-bottom: 12px;
+        }
+
+        .features-intro {
+            color: #666;
+            margin-bottom: 35px;
+            line-height: 1.7;
+        }
+
+        .feature-container {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .feature-box {
+            background: white;
+            padding: 30px 22px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(76, 29, 149, 0.08);
+            transition: 0.3s;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 38px;
+            margin-bottom: 16px;
+        }
+
+        .feature-box h3 {
+            color: #5b21b6;
+            margin-bottom: 12px;
+        }
+
+        .feature-box p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: #3b0764;
+            color: white;
+            padding: 25px 15px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: #fcd34d;
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 850px) {
+            .navbar {
+                justify-content: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero {
+                text-align: center;
+                justify-content: center;
+                padding-top: 55px;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .feature-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 550px) {
+            .logo-section h2 {
+                font-size: 22px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .hero {
+                padding-left: 6%;
+                padding-right: 6%;
+            }
+
+            .poetry-card {
+                padding: 30px 20px;
+            }
+
+            .feature-container {
+                grid-template-columns: 1fr;
+            }
+
+            .features h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+     <header class="navbar">
+
+        <img
+            src="{{ url_for('static', filename='images/logo.jpg') }}"
+            alt="VersePoetry Logo"
+            style="height: 110px; margin-right: 50px;"
+            >
+            <h2>VersePoetry</h2>
+        </div>
+
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Home</a>
+           <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+            
+        </div>
+    </nav>
+     </header>
+
+    <!-- Hero Section -->
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <span class="tagline">WELCOME TO VERSEPOETRY</span>
+
+                <h1>
+                    Every Word Has a Story,
+                    <span>Every Story Has a Soul.</span>
+                </h1>
+
+                <p>
+                    Welcome to VersePoetry, a creative space where words
+                    express emotions, ideas become stories, and your thoughts
+                    find their place. Sign in to explore your personal space
+                    and manage your documents in one place.
+                </p>
+
+<div class="hero-buttons">
+    <a href="{{ url_for('login') }}" class="btn btn-primary">
+
+    
+
+        Get Started →
+    </a>
+</div>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="poetry-card">
+
+                <div class="quote-symbol">“</div>
+
+                <h2>Words That Touch the Heart</h2>
+
+                <div class="poetry-line"></div>
+
+                <p>
+                    Some feelings become poetry,<br>
+                    Some thoughts become stories,<br>
+                    And some words stay with us forever.
+                </p>
+
+                <div class="poetry-line"></div>
+
+                <small>— The VersePoetry Spirit</small>
+
+            </div>
+
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+
+            <h2>Discover VersePoetry</h2>
+
+            <p class="features-intro">
+                Your personal space to organize, manage, and connect.
+            </p>
+
+            <div class="feature-container">
+
+                <div class="feature-box">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Secure Login</h3>
+                    <p>
+                        Access your account through email OTP verification.
+                    </p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">📄</div>
+                    <h3>Document Upload</h3>
+                    <p>
+                        Upload and organize your documents in one place.
+                    </p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">👤</div>
+                    <h3>Personal Profile</h3>
+                    <p>
+                        Manage your profile information from your account.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 VersePoetry. All rights reserved.</p>
+        <p>Where words find their home.</p>
+    </footer>
+
+</body>
+</html>
+

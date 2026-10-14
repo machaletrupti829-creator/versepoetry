@@ -1,0 +1,149 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification | VersePoetry</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f8e8ee, #e6e6fa);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 420px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        h1 {
+            color: #7b2d5f;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #555;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            font-size: 20px;
+            text-align: center;
+            letter-spacing: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: #7b2d5f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #602148;
+        }
+
+        .message {
+            color: #b00020;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #7b2d5f;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>VersePoetry</h1>
+        <h2>OTP Verification</h2>
+
+        <p>
+            Enter the OTP sent to your email address
+            to approve your laptop login.
+        </p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <label for="otp">Enter OTP</label>
+
+            <input
+                type="text"
+                id="otp"
+                name="otp"
+                placeholder="Enter 6-digit OTP"
+                inputmode="numeric"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                autocomplete="one-time-code"
+                required
+            >
+
+            <button type="submit">Verify OTP</button>
+        </form>
+
+        <a class="back" href="{{ url_for('login') }}">
+            Back to Login
+        </a>
+    </div>
+</body>
+</html>
+```

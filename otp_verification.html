@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verify OTP | VersePoetry</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #fff7ed, #f3e8ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation */
+        nav {
+            background: #4c1d95;
+            padding: 15px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .brand img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: white;
+            object-fit: contain;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #fcd34d;
+        }
+
+        /* Main section */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 35px 20px;
+        }
+
+        .otp-card {
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            padding: 40px 35px;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(76, 29, 149, 0.15);
+            text-align: center;
+        }
+
+        .otp-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #4c1d95;
+            font-size: 29px;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #777;
+            line-height: 1.7;
+            font-size: 15px;
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            color: #444;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #d6c8ef;
+            border-radius: 9px;
+            font-size: 22px;
+            text-align: center;
+            letter-spacing: 8px;
+            margin-bottom: 22px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px #ede9fe;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #7c3aed;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #5b21b6;
+        }
+
+        .resend {
+            margin-top: 20px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .resend a {
+            color: #6d28d9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 25px;
+            color: #6d28d9;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #3b0764;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 500px) {
+            .otp-card {
+                padding: 30px 22px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="brand">
+            <img src="C:\Users\Trupti\OneDrive\Desktop\versepoetry\statics\images\logo.jpg" alt="VersePoetry Logo">
+            <span>VersePoetry</span>
+        </div>
+    </nav>
+
+    <!-- OTP Verification -->
+    <main>
+        <section class="otp-card">
+
+            <div class="otp-icon">🔐</div>
+
+            <h1>Verify Your Email</h1>
+
+            <p class="description">
+                Enter the 6-digit OTP sent to your email address
+                to continue to VersePoetry.
+            </p>
+
+            <form id="otpForm">
+
+                <label for="otp">Enter 6-Digit OTP</label>
+
+                <input
+                    type="text"
+                    id="otp"
+                    name="otp"
+                    placeholder="000000"
+                    inputmode="numeric"
+                    pattern="[0-9]{6}"
+                    maxlength="6"
+                    autocomplete="one-time-code"
+                    required
+                >
+
+                <button type="submit">Verify OTP</button>
+
+            </form>
+
+            <p class="resend">
+                Didn't receive the code?
+                <a href="#" id="resendLink">Resend OTP</a>
+            </p>
+
+            <a href="login.html" class="back-link">
+                ← Back to Login
+            </a>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 VersePoetry. All rights reserved.</p>
+        <p>Where words find their home.</p>
+    </footer>
+
+    <script>
+        // Front-end preview only; real OTP verification comes with Flask.
+        document.getElementById("otpForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const otp = document.getElementById("otp").value.trim();
+
+            if (!/^[0-9]{6}$/.test(otp)) {
+                alert("Please enter a valid 6-digit OTP.");
+                return;
+            }
+
+            alert("OTP verification will work after Flask is connected.");
+        });
+
+        document.getElementById("resendLink").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            alert("Resend OTP will work after Flask and email configuration are connected.");
+        });
+    </script>
+
+</body>
+</html>
+

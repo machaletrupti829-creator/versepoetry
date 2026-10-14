@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Successful | VersePoetry</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f3e7ff, #e6e9ff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .box {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        h2 {
+            color: #6c3bb5;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 22px;
+            background: #6c3bb5;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<!-- Navigation Bar -->
+    <nav>
+        <header>
+        <img
+            src="{{ url_for('static', filename='images/logo.jpg') }}"
+            alt="VersePoetry Logo"
+            style="height: 110px; margin-right: 50px;"
+
+>
+        <h2>VersePoetry</h2>
+
+</header>
+        
+<body>
+    <div class="box">
+        <h2>✓ Login Successful!</h2>
+
+        <p>Your QR login was successful.</p>
+        <p>You can now continue using VersePoetry.</p>
+
+        <a href="{{ url_for('poem_submission') }}">
+            Go to Poem Submission
+        </a>
+    </div>
+</body>
+</html>

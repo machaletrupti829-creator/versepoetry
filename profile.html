@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | VersePoetry</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #fff7f0;
+            color: #3d2b2b;
+        }
+
+        /* Navigation */
+        nav {
+            background: #4b2e39;
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #f4c2c2;
+        }
+
+        /* Page Heading */
+        .heading {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        .heading h1 {
+            font-size: 38px;
+            color: #4b2e39;
+            margin-bottom: 10px;
+        }
+
+        .heading h1 span {
+            color: #a0526d;
+        }
+
+        .heading p {
+            color: #80656c;
+            line-height: 1.6;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            max-width: 950px;
+            margin: 25px auto 60px;
+            padding: 0 20px;
+        }
+
+        .profile-card {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(75, 46, 57, 0.10);
+            margin-bottom: 25px;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            min-width: 110px;
+            border-radius: 50%;
+            background: #f1dce5;
+            color: #8f4961;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 43px;
+            font-weight: bold;
+        }
+
+        .profile-details h2 {
+            font-size: 27px;
+            color: #4b2e39;
+            margin-bottom: 10px;
+            overflow-wrap: anywhere;
+        }
+
+        .profile-details p {
+            color: #80656c;
+            margin-bottom: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: #f9e8ee;
+            color: #8f4961;
+            font-size: 13px;
+        }
+
+        /* Sections */
+        .section-card {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(75, 46, 57, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .section-card h2 {
+            color: #4b2e39;
+            margin-bottom: 18px;
+            font-size: 23px;
+        }
+
+        .section-card p {
+            color: #80656c;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .stat-box {
+            background: #fff7f9;
+            border: 1px solid #f0dce3;
+            padding: 22px;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .stat-box h3 {
+            color: #8f4961;
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .stat-box p {
+            font-size: 14px;
+        }
+
+        /* Buttons */
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 25px;
+            background: #8f4961;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #6f354a;
+        }
+
+        .btn.secondary {
+            background: #f1dce5;
+            color: #6f354a;
+        }
+
+        .btn.secondary:hover {
+            background: #e8c8d5;
+        }
+
+        .message {
+            background: #f9ebe4;
+            color: #6f354a;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .poem-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .poem-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border: 1px solid #f0dce3;
+            border-radius: 10px;
+            background: #fffafb;
+        }
+
+        .poem-item h3 {
+            color: #4b2e39;
+            margin-bottom: 6px;
+            overflow-wrap: anywhere;
+        }
+
+        .poem-item p {
+            font-size: 13px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 18px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .status-pending {
+            background: #fff1c7;
+            color: #8a6500;
+        }
+
+        .status-approved {
+            background: #dff7e7;
+            color: #176b35;
+        }
+
+        .status-rejected {
+            background: #ffe4e4;
+            color: #a21b1b;
+        }
+
+        /* Footer */
+        footer {
+            background: #4b2e39;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                justify-content: center;
+            }
+
+            nav .links {
+                justify-content: center;
+            }
+
+            .heading h1 {
+                font-size: 31px;
+            }
+
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px 18px;
+            }
+
+            .profile-details h2 {
+                font-size: 23px;
+            }
+
+            .section-card {
+                padding: 22px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .button-row {
+                justify-content: center;
+            }
+
+            .poem-item {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">VersePoetry</div>
+
+        <div class="links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('profile') }}" class="active">Profile</a>
+        </div>
+    </nav>
+
+    <!-- Heading -->
+    <section class="heading">
+        <h1>My <span>Profile</span></h1>
+        <p>Your personal space in the VersePoetry community.</p>
+    </section>
+
+    <main class="profile-container">
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Profile Information -->
+        <section class="profile-card">
+
+            <div class="avatar">
+                {{ (user.name or user.email or 'U')[0]|upper }}
+            </div>
+
+            <div class="profile-details">
+                <h2>{{ user.name or 'Poetry Lover' }}</h2>
+
+                <p>
+                    <strong>Email:</strong>
+                    {{ user.email }}
+                </p>
+
+                <p>
+                    Welcome to your VersePoetry profile!
+                </p>
+
+                <span class="badge">💜 VersePoetry Member</span>
+            </div>
+
+        </section>
+
+        <!-- Statistics -->
+        <section class="section-card">
+            <h2>My Poetry Journey</h2>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <h3>{{ poem_counts.total }}</h3>
+                    <p>Poems Submitted</p>
+                </div>
+                <div class="stat-box">
+                    <h3>{{ poem_counts.pending }}</h3>
+                    <p>Pending</p>
+                </div>
+                <div class="stat-box">
+                    <h3>{{ poem_counts.approved }}</h3>
+                    <p>Approved</p>
+                </div>
+                <div class="stat-box">
+                    <h3>{{ poem_counts.rejected }}</h3>
+                    <p>Rejected</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Poems -->
+        <section class="section-card">
+            <h2>My Poems</h2>
+
+            {% if poems %}
+                <div class="poem-list">
+                    {% for poem in poems %}
+                        <div class="poem-item">
+                            <div>
+                                <h3>{{ poem.title }}</h3>
+                                <p>Submitted: {{ poem.created_at }}</p>
+                            </div>
+                            <span class="status-badge status-{{ poem.status|lower }}">
+                                {{ poem.status }}
+                            </span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </section>
+
+        <!-- Account Actions -->
+        <section class="section-card">
+            <h2>Account</h2>
+
+            <p>
+                Continue exploring, writing poems, and connecting
+                with the VersePoetry community.
+            </p>
+
+            <div class="button-row">
+                <a href="{{ url_for('index') }}" class="btn secondary">
+                    Back to Home
+                </a>
+
+                <a href="{{ url_for('contact') }}" class="btn secondary">
+                    Contact Us
+                </a>
+
+                <a href="{{ url_for('login') }}" class="btn">
+                    Login Page
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 VersePoetry | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>

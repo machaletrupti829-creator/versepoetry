@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VersePoetry | Contact Us</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fff7f0;
+            color: #3d2b2b;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #4b2e39;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-section img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .logo-section h2 {
+            color: white;
+            font-size: 24px;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        nav .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav .nav-links a:hover,
+        nav .nav-links a.active {
+            color: #f4c2c2;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+
+        .hero h1 {
+            font-size: 43px;
+            color: #4b2e39;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #a0526d;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #60464d;
+        }
+
+        /* Contact Layout */
+        .contact-section {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 30px;
+            padding: 25px 8% 60px;
+            flex-wrap: wrap;
+        }
+
+        /* Contact Information */
+        .contact-info {
+            flex: 1;
+            min-width: 260px;
+            max-width: 350px;
+            background-color: #4b2e39;
+            color: white;
+            padding: 35px 28px;
+            border-radius: 15px;
+        }
+
+        .contact-info h2 {
+            font-size: 27px;
+            margin-bottom: 18px;
+        }
+
+        .contact-info > p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #f4e4e8;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            margin-bottom: 25px;
+        }
+
+        .info-item h3 {
+            color: #f4c2c2;
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .info-item p {
+            color: white;
+            font-size: 14px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        /* Form */
+        .contact-form {
+            flex: 1.5;
+            min-width: 280px;
+            max-width: 600px;
+            background-color: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(75, 46, 57, 0.12);
+        }
+
+        .contact-form h2 {
+            color: #4b2e39;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #80656c;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4b2e39;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d8bfc5;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            background-color: #fffaf7;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            border-color: #8f4961;
+            box-shadow: 0 0 5px rgba(143, 73, 97, 0.2);
+        }
+
+        .input-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #8f4961;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #6f354a;
+        }
+
+        .message {
+            padding: 13px;
+            margin: 15px 0 20px;
+            border-radius: 8px;
+            text-align: center;
+            background-color: #f9ebe4;
+            color: #6f354a;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #4b2e39;
+            color: white;
+            text-align: center;
+            padding: 22px;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+                padding: 18px;
+            }
+
+            nav .nav-links {
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .contact-section {
+                padding: 20px 5% 40px;
+            }
+
+            .contact-info,
+            .contact-form {
+                max-width: 100%;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+     <header>
+     <nav>
+        <img
+            src="{{ url_for('static', filename='images/logo.jpg') }}"
+            alt="VersePoetry Logo"
+            style="height: 110px; margin-right: 50px;"
+>
+        <h2>VersePoetry</h2>
+
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('profile') }}" class="active">Profile</a>
+        </div>
+    </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Contact <span>Us</span></h1>
+
+        <p>
+            Have a question, an idea, or a beautiful poem to share?
+            We would love to hear from you.
+            Connect with the VersePoetry community!
+        </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h2>Let's Connect</h2>
+
+            <p>
+                Every great conversation begins with a few words.
+                Send us your questions, suggestions, or feedback.
+            </p>
+
+            <div class="info-item">
+                <h3>✉ Email</h3>
+                <p>Send us a message using the contact form.</p>
+            </div>
+
+            <div class="info-item">
+                <h3>✍ Our Purpose</h3>
+                <p>
+                    Bringing poetry lovers together through
+                    creativity, imagination, and expression.
+                </p>
+            </div>
+
+            <div class="info-item">
+                <h3>💜 Our Community</h3>
+                <p>
+                    A welcoming space for readers, writers,
+                    and everyone who loves words.
+                </p>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+
+            <h2>Send Us a Message</h2>
+
+            <p class="subtitle">
+                Fill out the form below and share your thoughts with us.
+            </p>
+
+            <!-- Flask flash messages -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message" role="status">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('contact') }}" method="POST">
+
+                <div class="input-group">
+                    <label for="name">Your Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        maxlength="254"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a subject</option>
+                        <option value="General Inquiry">General Inquiry</option>
+                        <option value="Feedback">Feedback</option>
+                        <option value="Poetry Submission">Poetry Submission</option>
+                        <option value="Technical Support">Technical Support</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="message">Your Message</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Write your message here..."
+                        maxlength="5000"
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Send Message
+                </button>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="message {{ category }}" role="status">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+            </form>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 VersePoetry | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
+

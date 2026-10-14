@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Submit Poem | VersePoetry</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5eaff, #fff4f8);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #5b2c83;
+            padding: 16px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffd6f5;
+        }
+
+        /* Main Container */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 45px auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .heading h1 {
+            color: #5b2c83;
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .heading p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Submission Card */
+        .poem-card {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(91, 44, 131, 0.12);
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #4b256d;
+            margin-bottom: 9px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #d8c5e8;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #7b3fa1;
+            box-shadow: 0 0 5px rgba(123, 63, 161, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 220px;
+            line-height: 1.7;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #999;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #6a3292;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #4b216e;
+            transform: translateY(-1px);
+        }
+
+        /* Flash Messages */
+        .message {
+            padding: 13px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .success {
+            background: #e4f8e9;
+            color: #216b35;
+            border: 1px solid #b8e6c2;
+        }
+
+        .error {
+            background: #ffe8e8;
+            color: #a32222;
+            border: 1px solid #f4c1c1;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 22px 15px;
+            margin-top: 35px;
+            background: #5b2c83;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                padding: 18px;
+            }
+
+            nav ul {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .container {
+                width: 92%;
+                margin: 30px auto;
+            }
+
+            .heading h1 {
+                font-size: 28px;
+            }
+
+            .poem-card {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="{{ url_for('index') }}" class="logo">VersePoetry</a>
+
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('poem_submission') }}">Submit Poem</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <div class="heading">
+            <h1>Share Your Poetry ✍️</h1>
+            <p>
+                Every poem tells a story. Write your thoughts, express your feelings,
+                and share your creativity with VersePoetry.
+            </p>
+        </div>
+
+        <div class="poem-card">
+
+            <!-- Flask Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="message {{ 'success' if category == 'success' else 'error' }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Poem Submission Form -->
+            <form action="{{ url_for('poem_submission') }}"
+      method="POST"
+      enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label for="title">Poem Title</label>
+        <input type="text"
+               id="title"
+               name="title"
+               placeholder="Enter your poem title"
+               required>
+    </div>
+
+     <div class="form-group">
+        <label for="title">name</label>
+        <input type="text"
+               id="name"
+               name="name"
+               placeholder="Enter your  name"
+               required>
+    </div>
+
+
+
+    <div class="form-group">
+        <label for="poem_file">Or Choose a Poem File</label>
+        <input type="file"
+               id="poem_file"
+               name="poem_file"
+               accept=".txt,.docx,.pdf">
+        <small>Select a TXT, DOCX, or PDF file.</small>
+    </div>
+
+    <button type="submit" class="submit-btn">
+        Submit Poem
+    </button>
+
+</form>
+
+
+            </form>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 VersePoetry. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

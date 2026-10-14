@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VersePoetry | About</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #d67521;
+            color: #3d2b2b;
+        }
+
+
+        /* ================= NAVIGATION ================= */
+
+        nav {
+            background-color: #e5dce0;
+            padding: 15px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-section img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo-section h2 {
+            color: rgb(167, 234, 227);
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f5f1f1;
+        }
+
+        nav ul li a.active {
+            color: #f4c2c2;
+        }
+
+
+        /* ================= ABOUT HERO ================= */
+
+        .about-hero {
+            min-height: 45vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #f9ebe4;
+        }
+
+        .about-hero h1 {
+            font-size: 50px;
+            color: #4b2e39;
+            margin-bottom: 15px;
+        }
+
+        .about-hero h1 span {
+            color: #a0526d;
+        }
+
+        .about-hero p {
+            max-width: 750px;
+            margin: auto;
+            font-size: 18px;
+            line-height: 1.7;
+            color: #60464d;
+        }
+
+
+        /* ================= ABOUT SECTION ================= */
+
+        .about-section {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 20px;
+            object-fit: contain;
+        }
+
+        .about-content h2 {
+            color: #4b2e39;
+            font-size: 34px;
+            margin-bottom: 18px;
+        }
+
+        .about-content h2 span {
+            color: #a0526d;
+        }
+
+        .about-content p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #60464d;
+            margin-bottom: 18px;
+        }
+
+
+        /* ================= VALUES ================= */
+
+        .values {
+            background-color: #f9ebe4;
+            padding: 60px 8%;
+            text-align: center;
+        }
+
+        .values h2 {
+            color: #4b2e39;
+            font-size: 32px;
+            margin-bottom: 35px;
+        }
+
+        .value-cards {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .value-card {
+            width: 260px;
+            background-color: white;
+            padding: 28px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .value-card .icon {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .value-card h3 {
+            color: #8f4961;
+            margin-bottom: 12px;
+        }
+
+        .value-card p {
+            color: #66545a;
+            line-height: 1.6;
+        }
+
+
+        /* ================= MISSION ================= */
+
+        .mission {
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .mission h2 {
+            color: #4b2e39;
+            font-size: 32px;
+            margin-bottom: 18px;
+        }
+
+        .mission p {
+            max-width: 800px;
+            margin: auto;
+            color: #60464d;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background-color: #4b2e39;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .about-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-hero h1 {
+                font-size: 40px;
+            }
+
+            .about-content h2 {
+                font-size: 30px;
+            }
+
+        }
+
+.navbar {
+    background-color: #4b2e39;
+    padding: 15px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #f4c2c2;
+}
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    
+    
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+
+        <img
+            src="{{ url_for('static', filename='images/logo.jpg') }}"
+            alt="VersePoetry Logo"
+           style="height: 110px; margin-right: 50px;"
+            >
+            <h2>VersePoetry</h2>
+        </div>
+
+        <nav class="nav-links">
+    <a href="{{ url_for('login') }}" class="login-link">Login</a>
+    <a href="{{ url_for('about') }}">About</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+    <a href="{{ url_for('profile') }}">Profile</a>
+    </nav>
+     </header>
+
+
+
+    <!-- ================= ABOUT HERO ================= -->
+
+    <section class="about-hero">
+
+        <div>
+
+            <h1>
+                About <span>VersePoetry</span>
+            </h1>
+
+            <p>
+                A place where creativity finds its voice,
+                emotions become words, and every verse
+                deserves to be heard.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= MAIN ABOUT ================= -->
+
+    <section class="about-section">
+
+
+        <div class="about-image">
+
+            <img
+                src="{{ url_for('static', filename='images/about.jpeg') }}"
+                alt="About VersePoetry"
+            >
+
+        </div>
+
+
+
+        <div class="about-content">
+
+            <h2>
+                Where <span>Words</span> Come Alive
+            </h2>
+
+            <p>
+                VersePoetry is a creative platform designed
+                for people who love poetry and storytelling.
+            </p>
+
+            <p>
+                It provides a simple and welcoming space
+                where poets can share their thoughts,
+                emotions, experiences, and imagination
+                through poetry.
+            </p>
+
+            <p>
+                Whether you are an experienced poet or
+                someone writing your first verse, VersePoetry
+                gives your words a place to be discovered.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= OUR VALUES ================= -->
+
+    <section class="values">
+
+        <h2>
+            What VersePoetry Stands For
+        </h2>
+
+
+        <div class="value-cards">
+
+
+            <div class="value-card">
+
+                <div class="icon">
+                    ✍️
+                </div>
+
+                <h3>
+                    Creativity
+                </h3>
+
+                <p>
+                    Encouraging everyone to express
+                    their imagination through words.
+                </p>
+
+            </div>
+
+
+
+            <div class="value-card">
+
+                <div class="icon">
+                    💜
+                </div>
+
+                <h3>
+                    Expression
+                </h3>
+
+                <p>
+                    Giving emotions, thoughts and stories
+                    a meaningful voice.
+                </p>
+
+            </div>
+
+
+
+            <div class="value-card">
+
+                <div class="icon">
+                    🌸
+                </div>
+
+                <h3>
+                    Community
+                </h3>
+
+                <p>
+                    Bringing poetry lovers together
+                    to share and appreciate creativity.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= MISSION ================= -->
+
+    <section class="mission">
+
+        <h2>
+            Our Vision
+        </h2>
+
+        <p>
+            Our vision is to create a beautiful digital
+            space where poetry is celebrated, creativity
+            is encouraged, and every writer feels that
+            their words matter.
+        </p>
+
+    </section>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 VersePoetry | All Rights Reserved
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
+
+

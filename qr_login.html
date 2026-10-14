@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QR Login | VersePoetry</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f3e7ff, #e6e9ff);
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            padding: 35px 25px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            color: #6c3bb5;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #29213b;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .qr-box {
+            width: 250px;
+            min-height: 250px;
+            margin: 0 auto 20px;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #e4d7f7;
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        .qr-box img {
+            display: block;
+            width: 100%;
+            max-width: 220px;
+            height: auto;
+        }
+
+        .expiry {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        #status {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background: #f4efff;
+            color: #6136a1;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #6c3bb5;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background: #51258f;
+        }
+
+        .note {
+            color: #777;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-top: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">VersePoetry</div>
+
+        <h2>Login with QR Code</h2>
+
+        <p class="description">
+            Scan this QR code using your mobile phone to log in
+            to VersePoetry on your laptop.
+        </p>
+
+        <div class="qr-box">
+            {% if qr_data %}
+                <img src="{{ qr_data }}" alt="VersePoetry QR Code">
+            {% else %}
+                <p>QR code could not be generated. Please try again.</p>
+            {% endif %}
+        </div>
+
+        <p class="expiry">
+            This QR code expires in {{ expires_in }} minutes.
+        </p>
+
+        <div id="status" role="status" aria-live="polite">
+            Waiting for QR scan...
+        </div>
+
+        <a href="{{ url_for('login') }}" class="back-button">
+            Back to Login
+        </a>
+
+        <p class="note">
+            Keep this page open while scanning the QR code.
+        </p>
+
+        <input type="hidden" id="qr-token" value="{{ token }}">
+
+    </div>
+
+    <script>
+        const token = document.getElementById("qr-token").value;
+        const statusElement = document.getElementById("status");
+
+        const statusUrl =
+            "{{ url_for('qr_status', token='TOKEN_PLACEHOLDER') }}"
+            .replace("TOKEN_PLACEHOLDER", encodeURIComponent(token));
+
+        let checking = false;
+
+        async function checkQRStatus() {
+            if (checking) return;
+
+            checking = true;
+
+            try {
+                const response = await fetch(statusUrl, {
+                    method: "GET",
+                    cache: "no-store"
+                });
+
+                if (!response.ok) {
+                    throw new Error("Server returned status " + response.status);
+                }
+
+                const data = await response.json();
+
+                if (data.status === "approved" && data.redirect) {
+                    statusElement.textContent =
+                        "Login successful! Opening Poem Submission...";
+
+                    window.location.assign(data.redirect);
+                    return;
+                }
+
+                if (data.status === "expired" || data.status === "used") {
+                    statusElement.textContent =
+                        "QR code expired or already used. Please generate a new QR code.";
+                    clearInterval(statusTimer);
+                    return;
+                }
+
+                if (data.status === "pending") {
+                    statusElement.textContent =
+                        "Waiting for QR scan...";
+                }
+
+            } catch (error) {
+                console.error("QR status error:", error);
+
+                statusElement.textContent =
+                    "Connection problem. Please check that the Flask server is running.";
+            } finally {
+                checking = false;
+            }
+        }
+
+        const statusTimer = setInterval(checkQRStatus, 2000);
+
+        checkQRStatus();
+    </script>
+
+</body>
+</html>
